@@ -1,16 +1,16 @@
-package BookStore;
+package bookstore;
 import java.util.Date;
-public class Ordered extends AbstractEvent {
+public class OrderChanged extends AbstractEvent {
 
     private Long id;
     private String bookName;
     private Integer bookQty;
     private String status;
     private Long orderId;
-    private Date orderDate;
+    private Date changeDate;
     private Long price;
 
-    public Ordered(){
+    public OrderChanged(){
         super();
     }
 
@@ -49,12 +49,12 @@ public class Ordered extends AbstractEvent {
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getChangeDate() {
+        return changeDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setChangeDate(Date changeDate) {
+        this.changeDate = changeDate;
     }
     public Long getPrice() {
         return price;

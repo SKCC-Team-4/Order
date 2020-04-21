@@ -1,4 +1,4 @@
-package BookStore.external;
+package bookstore.external;
 import java.util.Date;
 public class Payment {
 

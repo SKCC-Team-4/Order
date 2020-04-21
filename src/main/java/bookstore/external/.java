@@ -1,4 +1,4 @@
-package BookStore.external;
+package bookstore.external;
 
 //public class  {
 //

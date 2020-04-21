@@ -1,8 +1,8 @@
-package BookStore;
+package bookstore;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
-import java.util.List;
+
 import java.util.Date;
 @Entity
 @Table(name="Order_table")
@@ -31,10 +31,10 @@ public class Order {
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
 
-        BookStore.external.Payment payment = new BookStore.external.Payment();
+        bookstore.external.Payment payment = new bookstore.external.Payment();
         // mappings goes here
         payment.setOrderId(ordered.getId());
-        Application.applicationContext.getBean(BookStore.external.PaymentService.class)
+        Application.applicationContext.getBean(bookstore.external.PaymentService.class)
                 .payRequest(payment);
 
 
@@ -49,17 +49,18 @@ public class Order {
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-        BookStore.external.Payment payment = new BookStore.external.Payment();
+        bookstore.external.Payment payment = new bookstore.external.Payment();
         // mappings goes here
 //        Application.applicationContext.getBean(BookStore.external.PaymentService.class)
 //            .payRequest(payment);
 
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-
+        payment.setOrderId(orderChanged.getId());
+        payment.setStatus(orderChanged.getStatus());
         // mappings goes here
-        Application.applicationContext.getBean(BookStore.external.PaymentService.class)
-            .payCancel(payment, orderChanged.getOrderId());
+        Application.applicationContext.getBean(bookstore.external.PaymentService.class)
+            .payCancel(payment, orderChanged.getId());
 
 
     }

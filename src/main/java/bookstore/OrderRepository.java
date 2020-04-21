@@ -1,4 +1,4 @@
-package BookStore;
+package bookstore;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

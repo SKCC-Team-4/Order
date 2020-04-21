@@ -1,7 +1,6 @@
-package BookStore;
+package bookstore;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name="BookList_table")

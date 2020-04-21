@@ -1,11 +1,10 @@
-package BookStore;
+package bookstore;
 
-public class BookRegisterd extends AbstractEvent {
+public class BookChanged extends AbstractEvent {
 
     private Long id;
     private String book_name;
     private Integer book_qty;
-    private Long price;
 
     public Long getId() {
         return id;
@@ -27,12 +26,5 @@ public class BookRegisterd extends AbstractEvent {
 
     public void setBookQty(Integer book_qty) {
         this.book_qty = book_qty;
-    }
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
     }
 }
