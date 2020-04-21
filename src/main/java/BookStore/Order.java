@@ -24,16 +24,18 @@ public class Order {
     public void onPostPersist(){
         Ordered ordered = new Ordered();
         BeanUtils.copyProperties(this, ordered);
+        ordered.setOrderId(ordered.getId());
         ordered.publish();
 
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
+
         BookStore.external.Payment payment = new BookStore.external.Payment();
         // mappings goes here
         payment.setOrderId(ordered.getId());
         Application.applicationContext.getBean(BookStore.external.PaymentService.class)
-            .payRequest(payment);
+                .payRequest(payment);
 
 
     }
@@ -49,16 +51,15 @@ public class Order {
 
         BookStore.external.Payment payment = new BookStore.external.Payment();
         // mappings goes here
-        Application.applicationContext.getBean(BookStore.external.PaymentService.class)
-            .payRequest(payment);
+//        Application.applicationContext.getBean(BookStore.external.PaymentService.class)
+//            .payRequest(payment);
 
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-
         // mappings goes here
         Application.applicationContext.getBean(BookStore.external.PaymentService.class)
-            .payCancel(payment);
+            .payCancel(payment, orderChanged.getOrderId());
 
 
     }

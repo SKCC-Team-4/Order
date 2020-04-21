@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyHandler{
+    @Autowired
+    OrderRepository orderRepository;
     
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverPayCanceled_OrderCancel(@Payload PayCanceled payCanceled){
 
         if(payCanceled.isMe()){
             System.out.println("##### listener OrderCancel : " + payCanceled.toJson());
+
+            orderRepository.deleteById(payCanceled.getOrderId());
         }
     }
 
